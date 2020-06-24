@@ -1,0 +1,14 @@
+#!/bin/bash
+###################################################################
+#Script Name	:  cleanlogs                                                                                             
+#Description	:  delete all logs in /var/log                                                                               
+#Args         :                                                                                           
+#Author       :Grabitel1605                                               
+#Email        :Grabitel1605@gmail.com                                         
+###################################################################
+LOG_DIR=/var/log
+cd $LOG_DIR
+
+cat /dev/null > messages
+cat /dev/null > wtmp
+echo "Logs cleaned up."
