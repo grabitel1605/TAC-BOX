@@ -1,0 +1,13 @@
+#!/bin/bash 
+
+###################################################################
+#Script Name	: .tools-inst.sh                                                                                             
+#Description	: install a pre-selected set of tools                                                                                
+#Args           : N/A                                                                                          
+#Author       	:Grabitel1605                                               
+#Email         	:Grabitel1605@gmail.com                                         
+###################################################################
+
+sudo apt-get update
+sudo apt-get install -Vy rkhunter nmap tcpdump nano wget curl net-tools lsof bash-completion psmisc links unzip speedtest-cli iptables
+sudo apt-get autoremove -y && sudo apt-get autoclean && sudo apt-get clean
