@@ -145,31 +145,7 @@ https://picoctf.com/                |   (pico)
 
 https://www.hackthebox.eu/          |   (HTB)
 
-## CTF Schedule:
 
-## Dates            |    CTF
-                    
-June 21 - 27        |   [Learn Linux (THM) ](https://tryhackme.com/room/zthlinux)        
-
-June 28 - July 4    |   [RP: NMAP (THM)](https://tryhackme.com/room/rpnmap)
-
-July 5 - 11         |   [Basic Pentesting (THM)](https://tryhackme.com/room/basicpentestingjt) **Note:** Use the CTF Cheat Cheet (Additional Resources > Guides > CTF CheatSheet) to help with the additional tools needed for this CTF.
-
-July 16 - 17        |   [SANS CTF (SANS)](https://www.sans.org/blog/and-now-for-something-awesome-sans-launches-new-series-of-worldwide-capture-the-flag-cyber-events/) **Note:** SANS Community CTF -  Free SANS Account Needed - Registration opens July 13 (Use the link)
-
-On Your Own         |   [Introductory Researching (THM)](https://tryhackme.com/room/introtoresearch)
-
-On Your Own         |   [Google Dorking (THM)](https://tryhackme.com/room/googledorking)
-
-On Your Own         |   [Shodan.io (THM)](https://tryhackme.com/room/shodan)
-
-On Your Own         |   [OhSint (THM)](https://tryhackme.com/room/ohsint)
-
-On Your Own         |   [BP: Networking (THM)](https://tryhackme.com/room/bpnetworking)
-
-On Your Own         |   [Networking Services (THM)](https://tryhackme.com/room/networkservices)
-
-On Your Own         |   [The Find Command (THM)](https://tryhackme.com/room/thefindcommand)
 
 ## CTF Challenges:
 
