@@ -1,4 +1,4 @@
-# TAC-BOX ToolKit
+# TAC-BOX [ToolKit]
 
 This repo and guide will remain a open repo/document for continuous improvement, and will be used to 
 assist with learning and competing in CTF challenges to improve our cyber skillset.
