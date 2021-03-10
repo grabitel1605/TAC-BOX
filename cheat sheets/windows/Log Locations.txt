@@ -1,0 +1,9 @@
+application
+Microsoft-Windows-PowerShell%4Operational.evtx
+Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx
+PowerShellCore%4Operational.evtx
+security
+system
+windows powershell
+
+C:\Windows\System32\winevt\Logs
