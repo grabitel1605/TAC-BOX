@@ -1,0 +1,6 @@
+Verifying Download via Hash:
+
+You can use PowerShell to verify the source integrity with the following command:
+
+Get-FileHash .\downloaded-file-name -Algorithm SHA256 | Format-List
+
