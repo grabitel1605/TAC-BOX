@@ -76,5 +76,8 @@ alias count='find . -type f | wc -l'
 
 #Copy, but with a progress bar (essentially)
 alias cpv='rsync -ah --info=progress2'
+
+# add line numbers to nano
+alias nano='nano --linenumbers'
   
   
