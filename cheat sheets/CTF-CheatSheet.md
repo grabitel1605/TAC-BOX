@@ -113,7 +113,8 @@ http://www.insidepro.com/eng/download.shtml
 
 ## smbserv:
 
-cp /usr/share/doc/python-impacket/examples/smbserver.py .    
+cp /usr/share/doc/python-impacket/examples/smbserver.py .   
+python smbserver.py share [directory]
      
 ## Research:
 
