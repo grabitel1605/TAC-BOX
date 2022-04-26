@@ -9,8 +9,6 @@
 ```mkdir /mnt/kenobiNFS```
 ```mount machine_ip:/var /mnt/kenobiNFS```
 ```ls -la /mnt/kenobiNFS```
-    
-```python -m SimpleHTTPServer [port]```
 
 ## Wordlists:
 
@@ -20,7 +18,18 @@ https://web.archive.org/web/20120207113205/
 
 http://www.insidepro.com/eng/download.shtml
 
-### Parrot = /usr/share/wordlists
+### Parrot or kali = /usr/share/wordlists
+
+## Listeners:
+
+**metasploit**
+	use exlpoit/multi/handler
+	set lhost [attackbox IP]
+	set lport [attackbox port]
+	run
+	
+**netcat**
+	nc -lvnp [port]
 
 ## SSH:
     
