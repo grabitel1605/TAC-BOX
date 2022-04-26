@@ -143,6 +143,68 @@ GTFO Bins (https://gtfobins.github.io/)
     
 ## Linux Priv Esc:
 
+**Gather Info:**
+	
+	Kernel & hostname:
+	
+	cat /etc/issue
+	cat /proc/version
+	hostname
+	uname -a
+	
+	Users:
+	
+	cat /etc/passwd
+	id
+	who
+	w
+	
+	sudo -l
+	
+	Networking Info:
+	
+	ifconfig -a
+	route
+	netstat -antup
+	arp -e
+	
+	Applications & Services:
+	
+	ps aux
+	dpkg -l
+	rpm -qa
+	ls -ls /etc/ | grep .conf
+	ls -ls /var/www/html
+	
+	(find SUID programs)
+	find /* -user root -perm -4000 -print 2>/dev/null
+	
+	Files and file systems:
+	cat /etc/fstab
+	
+	(find world writable directories)
+	find / \( -wholename '/home/homedir*' -prune \) -o \( -type d -perm -0002 \) -exec ls -ld '{}' ';' 2>/dev/null | grep -v root
+	
+	(find world writable directories for root)
+	find / \( -wholename '/home/homedir*' -prune \) -o \( -type d -perm -0002 \) -exec ls -ld '{}' ';' 2>/dev/null | grep root
+	
+	(find world writable files)
+	find / \( -wholename '/home/homedir/*' -prune -o -wholename '/proc/*' -prune \) -o \( -type f -perm -0002 \) -exec ls -l '{}' ';' 2>/dev/null
+	
+	(find world writable files in /etc)
+	find /etc -perm -2 -type f 2>/dev/null
+	
+	(find world writable directories)
+	find / -writable -type d 2>/dev/null
+	
+	LinPeas
+	wget https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/linPEAS/linpeas.sh
+	
+	Linux privesc checker
+	wget http://www.securitysift.com/download/linuxprivchecker.py
+	python linuxprivchecker.py
+		
+	
 **Enumeration:** https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
     
 **Escaping Vi Editor:**
