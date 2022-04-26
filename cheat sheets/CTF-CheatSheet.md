@@ -22,13 +22,15 @@ http://www.insidepro.com/eng/download.shtml
 
 ## Listeners:
 
-**metasploit**
+**metasploit:**
+
 	use exlpoit/multi/handler
 	set lhost [attackbox IP]
 	set lport [attackbox port]
 	run
 	
-**netcat**
+**netcat:**
+
 	nc -lvnp [port]
 
 ## SSH:
