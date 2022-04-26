@@ -18,7 +18,15 @@ https://web.archive.org/web/20120207113205/
 
 http://www.insidepro.com/eng/download.shtml
 
-### Parrot or kali = /usr/share/wordlists
+/usr/share/wordlists
+
+## Webshells:
+
+/usr/share/webshells
+
+## Pre-Compiled Binaries:
+
+/usr/share/windows-binaries
 
 ## Listeners:
 
