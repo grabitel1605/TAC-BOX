@@ -110,7 +110,10 @@ http://www.insidepro.com/eng/download.shtml
 ```smbclient //<ip>/anonymous```
     
 ```smbget -R smb://<ip>/anonymous```
-    
+
+## smbserv:
+
+cp /usr/share/doc/python-impacket/examples/smbserver.py .    
      
 ## Research:
 
