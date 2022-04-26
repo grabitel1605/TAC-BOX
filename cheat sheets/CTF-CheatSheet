@@ -57,6 +57,11 @@ HTTP/HTTPS:
         -X specifies the request
         --data specifies POST data
         example: curl http://10.10.75.167:8081/ctf/post -X POST --data flag_please
+	
+    Python3 Simple HTTP Server:
+    	python3 -m http.server 80
+	or if python3 is default in path:
+	python -m http.server 80
     
     
 Wordlist:
