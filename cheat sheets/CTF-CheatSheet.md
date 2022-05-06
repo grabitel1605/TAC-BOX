@@ -43,9 +43,8 @@ http://www.insidepro.com/eng/download.shtml
 	
 **Use the following command to spawn a PTY shell with Python:**
 
-python -c 'import pty; pty.spawn("/bin/bash");'
-
-(PTY stands for ‘pseudo-teletype’ which emulates and has the functions of a terminal without actually being one).
+	python -c 'import pty; pty.spawn("/bin/bash");'
+	(PTY stands for ‘pseudo-teletype’ which emulates and has the functions of a terminal without actually being one).
 	
 ## Transferring Exploits:
 
