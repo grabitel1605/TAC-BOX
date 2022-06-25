@@ -46,6 +46,8 @@ http://www.insidepro.com/eng/download.shtml
 	python -c 'import pty; pty.spawn("/bin/bash");'
 	(PTY stands for ‘pseudo-teletype’ which emulates and has the functions of a terminal without actually being one).
 	
+	Then ctrl+z and use stty raw -echo && fg to get tty, may need to use reset command after.
+	
 ## Transferring Exploits:
 
 **Python3 Simple HTTP Server:**
